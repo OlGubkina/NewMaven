@@ -1,0 +1,39 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- этот аппендер пишет в консоль
+        encoders are assigned the type
+        ch.qos.logback.classic.encoder.PatternLayoutEncoder by
+       default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n </pattern>
+        </encoder>
+    </appender>
+
+    <appender name = "FILE" class = "ch.qos.logback.core.FileAppender">
+        <!-- файл в корне file>tests.log</file-->
+        <file>src/main/resources/main_test.log</file>>
+
+        <append>false</append> <!-- true=Дополлнять файл/Переписывать-->
+        <encoder>
+            <pattern> %d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n </pattern>
+        </encoder>
+    </appender>
+
+    <variable name="log.level" value="${log.level:-INFO}" />
+    <!--
+    FATAL
+    ERROR
+    WARN
+    INFO+
+    DEBUG
+    TRACE+
+    -->
+
+    <root level="${log.level}">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <root>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
